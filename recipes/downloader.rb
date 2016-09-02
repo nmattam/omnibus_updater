@@ -46,6 +46,7 @@ if remote_path
     backup false
     checksum node['omnibus_updater']['checksum'] if node['omnibus_updater']['checksum']
     action :create_if_missing
+    notifies :create, 'ruby_block[Omnibus Chef install notifier]', :immediately
     only_if do
       unless (version = node['omnibus_updater']['version'])
         version = case node['platform_family']

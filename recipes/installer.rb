@@ -104,7 +104,6 @@ else
   ruby_block 'Omnibus Chef install notifier' do
     block { true }
     action :nothing
-    subscribes :create, "remote_file[omnibus_remote[#{File.basename(remote_path)}]]", :immediately
     notifies :run, "execute[omnibus_install[#{File.basename(remote_path)}]]", :delayed
     only_if { node['chef_packages']['chef']['version'] != node['omnibus_updater']['version'] }
   end
